@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+from PIL import Image
 
 st.title("實驗三: 柏努利文氏管實驗")
 
@@ -19,4 +20,15 @@ if os.path.exists(file_path):
     )
 else:
     st.error(f"檔案 {file_path} 不存在！")
+
+image = Image.open('picture/1.png')
+st.image(image, caption='圖片1')
+image = Image.open('picture/1.png')
+st.image(image, caption='圖片2')
+image = Image.open('picture/3.png')
+st.image(image, caption='圖片3')
+image = Image.open('picture/4.png')
+st.image(image, caption='圖片4')
+image = Image.open('picture/5.png')
+st.image(image, caption='圖片5')
 # 在這裡添加實驗一的具體內容，如圖表、數據等
