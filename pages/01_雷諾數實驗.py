@@ -5,19 +5,38 @@ st.title("實驗一:雷諾數實驗")
 
 st.write("這裡是雷諾數實驗的詳細內容。")
 
-file_path = "files/實驗1.雷諾數實驗.docx"
+# 設定文件路徑
+file_paths = {
+    "docx": "files/實驗1.雷諾數實驗.docx",
+    "pdf": "files/實驗1.雷諾數實驗.pdf",
+    "xls": "files/實驗1.雷諾數實驗.xls"
+}
 
-if os.path.exists(file_path):
-    with open(file_path, "rb") as f:
-        file_content = f.read()
+# 檢查文件並提供下載按鈕
+for file_type, path in file_paths.items():
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            file_content = f.read()
 
-    st.download_button(
-        label="下載 實驗1.雷諾數實驗.docx", 
-        data=file_content,  
-        file_name="實驗1.雷諾數實驗.docx", 
-        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    )
-else:
-    st.error(f"檔案 {file_path} 不存在！")
+        # 根據不同的文件類型設定 MIME 類型
+        if file_type == "docx":
+            mime_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            label = "下載 實驗1.雷諾數實驗.docx"
+        elif file_type == "pdf":
+            mime_type = "application/pdf"
+            label = "下載 實驗1.雷諾數實驗.pdf"
+        elif file_type == "xls":
+            mime_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            label = "下載 實驗1.雷諾數實驗.xls"
+
+        # 顯示下載按鈕
+        st.download_button(
+            label=label, 
+            data=file_content,  
+            file_name=path.split("/")[-1], 
+            mime=mime_type
+        )
+    else:
+        st.error(f"檔案 {path} 不存在！")
 
 # 在這裡添加實驗一的具體內容，如圖表、數據等
